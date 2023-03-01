@@ -1,0 +1,38 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/A1exTheCat/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/A1exTheCat/frontend-project-11/actions) <a href=\"https://codeclimate.com/github/A1exTheCat/frontend-project-11/maintainability\"><img src=\"https://api.codeclimate.com/v1/badges/667488ab046aa2914999/maintainability\" /></a>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A1exTheCat/frontend-project-11.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/A1exTheCat/frontend-project-11/issues"
+  },
+  "homepage": "https://github.com/A1exTheCat/frontend-project-11#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "html-webpack-plugin": "^5.5.0",
+    "postcss-loader": "^7.0.2",
+    "sass": "^1.58.3",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}
