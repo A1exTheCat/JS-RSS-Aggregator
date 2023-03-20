@@ -68,8 +68,20 @@ export default (initState, event, i18nextInstance) => {
           state.form.urlList.push(url);
           state.form.uiStatus = 'valid';
           //write a new part with updatingParser here
+          setTimeout(function updater () {
+            const list = state.form.urlList;
+            list.map((url) => {
+              axios.get(`https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`)
+              .then((response) => {
+              const newPosts = updatingParser(response, state);
+              state.form.posts.push(...newPosts);
+              })
+              .catch(console.log);
+            });
+            setTimeout (updater, 5000)
+          }, 5000);
         })
-        .catch((e) => {
+        .catch(() => {
           state.form.error = i18nextInstance.t('form.errors.network');
           state.form.uiStatus = 'invalid';
         });
