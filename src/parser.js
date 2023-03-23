@@ -19,7 +19,7 @@ const parser = (response) => {
       link: item.querySelector('link').nextSibling.textContent.trim(),
       desc: item.querySelector('description').textContent.trim(),
     }
-    newPosts.push(itemInfo);
+    newPosts.unshift(itemInfo);
   });
 
   return { newFeed, newPosts};

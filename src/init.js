@@ -10,6 +10,10 @@ export default () => {
       feed: [],
       posts: [],
       urlList: [],
+      readedPosts: [],
+    },
+    modalWindow: {
+      id: 0,
     }
   };
 

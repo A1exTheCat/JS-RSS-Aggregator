@@ -3,42 +3,88 @@ import onChange from 'on-change';
 import { setLocale } from 'yup';
 import axios from 'axios';
 import { parser, updatingParser } from './parser';
+import render from './render';
 
 export default (initState, event, i18nextInstance) => {
   // DOM element(could be reasonable to separate it to object with all elements for work)
-  const feedback = document.querySelector('.feedback');
-  const input = document.querySelector('#url-input');
+  const elements = {
+    body: document.querySelector('body'),
+    feedback : document.querySelector('.feedback'),
+    input : document.querySelector('#url-input'),
+    modalWindow : document.querySelector('.modal'),
+    feeds : document.querySelector('.feeds'),
+    posts : document.querySelector('.posts'),
+  };
   ///////////////
   // watched state for actions and renders, without state's manipulations
-  const state = onChange(initState, (path, value, previousValue) => {
+  const state = onChange(initState, (path, value) => {
     // here we adding reaction in states data and write render func or changes in classes(View)
     // and behavior of input window and texts
-    // renderFunc (state, i18nextInstance) and func below is working and should be in render func, but we need to switch url from feed
+    // !!!!!should be in render func, but we need to switch url from feed
+    if (path === 'form.feed') {
+      elements.input.value = '';
+      render(path, state, elements);
+    };
+    if (path === 'form.posts') {
+      render(path, state, elements);
+      const postsLinks = elements.posts.querySelectorAll('a');
+      const postsButtons = elements.posts.querySelectorAll('button');
+      postsLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          if (!state.form.readedPosts.includes(e.target.dataset.id)) {
+          state.form.readedPosts.push(e.target.dataset.id)
+          };
+        })
+      })
+      postsButtons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          state.modalWindow.id = e.target.dataset.id;
+          if (!state.form.readedPosts.includes(e.target.dataset.id)) {
+            state.form.readedPosts.push(e.target.dataset.id)
+          }
+        })
+      })
+    };
+    if (path === 'form.readedPosts') {
+      const readedId = value[value.length - 1];
+      const readedPost = elements.posts.querySelector(`[data-id='${readedId}']`);
+      readedPost.classList.remove('fw-bold');
+      readedPost.classList.add('fw-normal', 'link-secondary');
+      console.log(readedPost);
+    }
+    if (path === 'modalWindow.id') {
+      const modalTitle = elements.modalWindow.querySelector('.modal-title');
+      const modalBody = elements.modalWindow.querySelector('.modal-body');
+      const modalLink = elements.modalWindow.querySelector('a');
+      const currentModalData = state.form.posts.filter((post) => post.id === value)[0];
+      modalTitle.textContent = currentModalData.title;
+      modalBody.textContent = currentModalData.desc;
+      modalLink.setAttribute('href', currentModalData.link);
+    }
     if (path === 'form.uiStatus') {
       switch (value) {
         case 'valid': 
         //prepare page
-          input.classList.remove('is-invalid');
-          input.value = '';
-          input.focus();
-          feedback.classList.remove("text-danger");
-          feedback.classList.add("text-success");
-          feedback.textContent = i18nextInstance.t('form.success.successForm');
+          elements.input.classList.remove('is-invalid');
+          elements.input.value = '';
+          elements.input.focus();
+          elements.feedback.classList.remove("text-danger");
+          elements.feedback.classList.add("text-success");
+          elements.feedback.textContent = i18nextInstance.t('form.success.successForm');
           console.log(state);
-        // render here items
         break;
   
       case 'invalid': 
-        feedback.classList.remove("text-success");
-        feedback.classList.add("text-danger");
-        feedback.textContent = state.form.error;
-        input.classList.add('is-invalid');
+        elements.feedback.classList.remove("text-success");
+        elements.feedback.classList.add("text-danger");
+        elements.feedback.textContent = state.form.error;
+        elements.input.classList.add('is-invalid');
         break;
       }
     }
 
     if (path === 'form.error' && state.form.uiStatus === 'invalid') {
-      feedback.textContent = state.form.error;
+      elements.feedback.textContent = state.form.error;
     }
   });
   //////////////////
