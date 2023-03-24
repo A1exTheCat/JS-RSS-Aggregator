@@ -4,7 +4,7 @@ export default {
       errors: {
         errorString: 'Ссылка должна быть валидным URL',
         errorNotOneOf: 'RSS уже существует',
-        network: 'Ошибка сети',
+        network: 'Ресурс не содержит валидный RSS',
       }, 
       success: {
         successForm:'RSS успешно загружен',
