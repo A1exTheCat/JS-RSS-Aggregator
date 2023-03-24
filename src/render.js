@@ -14,7 +14,7 @@ export default (path, state, elements) => {
       const ulFeed = document.createElement('ul');
       ulFeed.classList.add('list-group', 'border-0', 'rounded-0');
       elements.feeds.append(divFeed);
-      elements.feeds.append(ulFeed);  
+      elements.feeds.append(ulFeed);
 
       const divPosts = document.createElement('div');
       divPosts.classList.add('card', 'border-0');
@@ -28,7 +28,7 @@ export default (path, state, elements) => {
       const ulPosts = document.createElement('ul');
       ulPosts.classList.add('list-group', 'border-0', 'rounded-0');
       elements.posts.append(divPosts);
-      elements.posts.append(ulPosts); 
+      elements.posts.append(ulPosts);
     }
     // adding a new feed
     const feedUl = elements.feeds.querySelector('ul');
@@ -48,7 +48,7 @@ export default (path, state, elements) => {
   // adding a new posts
   if (path === 'form.posts') {
     const newPosts = document.createElement('div');
-    state.form.posts.map((post) => {
+    state.form.posts.forEach((post) => {
       const list = document.createElement('li');
       list.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
       const link = document.createElement('a');
@@ -57,7 +57,9 @@ export default (path, state, elements) => {
       link.setAttribute('rel', 'noopener noreferrer');
       if (state.form.readedPosts.includes(post.id)) {
         link.classList.add('fw-normal', 'link-secondary');
-      } else {link.classList.add('fw-bold')};      
+      } else {
+        link.classList.add('fw-bold');
+      }
       link.setAttribute('data-id', post.id);
       link.innerText = post.title;
       const btn = document.createElement('button');
@@ -65,13 +67,13 @@ export default (path, state, elements) => {
       btn.setAttribute('data-id', post.id);
       btn.setAttribute('data-bs-toggle', 'modal');
       btn.setAttribute('data-bs-target', '#modal');
-      btn.classList.add('btn', 'btn-outline-primary', 'btn-sm')
+      btn.classList.add('btn', 'btn-outline-primary', 'btn-sm');
       btn.innerText = 'Просмотр';
       list.append(link);
       list.append(btn);
       newPosts.prepend(list);
-    })
+    });
     const postsUl = elements.posts.querySelector('ul');
     postsUl.innerHTML = newPosts.innerHTML;
   }
-}
+};

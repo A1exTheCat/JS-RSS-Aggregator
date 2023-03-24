@@ -1,10 +1,10 @@
 import uniqueId from 'lodash/uniqueId.js';
 
 const parser = (response) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(response.data.contents, "text/html");
+  const parsedData = new DOMParser();
+  const doc = parsedData.parseFromString(response.data.contents, 'text/html');
   const newFeed = {};
-  
+
   const channel = doc.querySelector('channel');
   const items = channel.querySelectorAll('item');
 
@@ -18,16 +18,16 @@ const parser = (response) => {
       title: item.querySelector('title').textContent,
       link: item.querySelector('link').nextSibling.textContent.trim(),
       desc: item.querySelector('description').textContent.trim(),
-    }
+    };
     newPosts.unshift(itemInfo);
   });
 
-  return { newFeed, newPosts};
+  return { newFeed, newPosts };
 };
 
 const updatingParser = (response, state) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(response.data.contents, "text/html");
+  const parsedData = new DOMParser();
+  const doc = parsedData.parseFromString(response.data.contents, 'text/html');
 
   const channel = doc.querySelector('channel');
   const items = channel.querySelectorAll('item');
@@ -41,12 +41,11 @@ const updatingParser = (response, state) => {
         title: item.querySelector('title').textContent,
         link: item.querySelector('link').nextSibling.textContent.trim(),
         desc: item.querySelector('description').textContent.trim(),
-      }
+      };
       updatedPosts.push(itemInfo);
-    } 
+    }
   });
-
   return updatedPosts;
-}
+};
 
 export { parser, updatingParser };
