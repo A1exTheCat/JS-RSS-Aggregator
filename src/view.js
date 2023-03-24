@@ -113,7 +113,7 @@ export default (initState, event, i18nextInstance) => {
           state.form.error = '';
           state.form.urlList.push(url);
           state.form.uiStatus = 'valid';
-          //write a new part with updatingParser here
+          //part with updatingParser here
           setTimeout(function updater () {
             const list = state.form.urlList;
             list.map((url) => {
@@ -122,13 +122,20 @@ export default (initState, event, i18nextInstance) => {
               const newPosts = updatingParser(response, state);
               state.form.posts.push(...newPosts);
               })
-              .catch(console.log);
+              //.catch((e) => {
+              //  state.form.error = i18nextInstance.t('form.errors.network');
+              //});
             });
             setTimeout (updater, 5000)
           }, 5000);
         })
-        .catch(() => {
-          state.form.error = i18nextInstance.t('form.errors.network');
+        .catch((e) => {
+          console.log(e.message);
+          if (e.message === 'Network Error') {
+            state.form.error = i18nextInstance.t('form.errors.network');
+          } else {
+          state.form.error = i18nextInstance.t('form.errors.invalidRss');
+          }
           state.form.uiStatus = 'invalid';
         });
     })
