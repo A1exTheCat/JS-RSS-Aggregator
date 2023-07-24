@@ -8,6 +8,14 @@
 
 RSS-agregator is an online service for aggregating RSS-feeds that makes it easier to read various sources. The service updates and adds new records into the common thread.
 
+## Technology Stack
+- Network requests - **[axios](https://github.com/axios/axios)**
+- ВPage layout - **[bootstrap](https://getbootstrap.com)**
+- Text handling - **[i18next](https://www.i18next.com)**
+- ДUtility functions - **[lodash](https://lodash.com)**
+- Change monitoring - **[on-change](https://github.com/sindresorhus/on-change)**
+- Validation - **[yup](https://github.com/jquense/yup)**
+
 ### Example
 
 ![Screenshot_1](https://github.com/A1exTheCat/JS-RSS-Aggregator/assets/111634577/15e145ac-0d61-46a7-8665-b5e273138566)
