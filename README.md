@@ -10,9 +10,9 @@ RSS-agregator is an online service for aggregating RSS-feeds that makes it easie
 
 ## Technology Stack
 - Network requests - **[axios](https://github.com/axios/axios)**
-- ВPage layout - **[bootstrap](https://getbootstrap.com)**
+- Page layout - **[bootstrap](https://getbootstrap.com)**
 - Text handling - **[i18next](https://www.i18next.com)**
-- ДUtility functions - **[lodash](https://lodash.com)**
+- Utility functions - **[lodash](https://lodash.com)**
 - Change monitoring - **[on-change](https://github.com/sindresorhus/on-change)**
 - Validation - **[yup](https://github.com/jquense/yup)**
 
