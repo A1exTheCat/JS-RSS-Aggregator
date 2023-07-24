@@ -4,7 +4,7 @@
 [![Actions Status](https://github.com/A1exTheCat/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/A1exTheCat/frontend-project-11/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/667488ab046aa2914999/maintainability)](https://codeclimate.com/github/A1exTheCat/frontend-project-11/maintainability)
 
-# About
+### About
 
 RSS-agregator is an online service for aggregating RSS-feeds that makes it easier to read various sources. The service updates and adds new records into the common thread.
 
